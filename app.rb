@@ -1,14 +1,11 @@
 require 'sinatra/base'
 require './lib/bookmark'
-require 'pg'
 
-class BookmarkApp < Sinatra::Base
-
+class BookmarkManager < Sinatra::Base
   get '/bookmarks' do
     @bookmarks = Bookmark.all
     erb(:index)
   end
 
-  run! if app_file == $0
-
+  run! if app_file == $PROGRAM_NAME
 end
