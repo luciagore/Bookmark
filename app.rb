@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require './lib/bookmark'
+require 'pg'
 
 class BookmarkApp < Sinatra::Base
 
