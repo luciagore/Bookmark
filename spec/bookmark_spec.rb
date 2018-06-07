@@ -3,14 +3,14 @@ require 'bookmark'
 describe Bookmark do
   describe '#all' do
     it 'returns all the bookmarks in an array' do
-      Bookmark.create(url: 'http://twitter.com')
-      Bookmark.create(url: 'http://destroyallsoftware.com')
-      Bookmark.create(url: 'http://google.com')
+      bookmark1 = Bookmark.create(url: 'http://twitter.com')
+      bookmark2 = Bookmark.create(url: 'http://destroyallsoftware.com')
+      bookmark3 = Bookmark.create(url: 'http://google.com')
 
       expected_bookmarks = [
-        'http://twitter.com',
-        'http://destroyallsoftware.com',
-        'http://google.com'
+        bookmark1,
+        bookmark2,
+        bookmark3
       ]
 
       expect(Bookmark.all).to eq expected_bookmarks
@@ -18,9 +18,18 @@ describe Bookmark do
 
     describe '#create' do
       it 'creates a new bookmark' do
-        Bookmark.create(url: 'http://www.testbookmark.com')
+        bookmark = Bookmark.create(url: 'http://www.testbookmark.com')
 
-        expect(Bookmark.all).to include 'http://www.testbookmark.com'
+        expect(Bookmark.all).to include bookmark
+      end
+    end
+
+    describe '#==' do
+      it 'two bookmarks are equal if their IDs match' do
+        bookmark1 = Bookmark.new(1, url: 'http://testbookmark.com')
+        bookmark2 = Bookmark.new(1, url: 'http://testbookmark.com')
+
+        expect(bookmark1).to eq bookmark2
       end
     end
   end
